@@ -1,0 +1,18 @@
+
+on init
+    chown root /sys/class/power_supply/battery/current_now
+    chown root /sys/class/power_supply/battery/voltage_now
+    chmod 0664 /sys/class/power_supply/battery/current_now
+    chmod 0664 /sys/class/power_supply/battery/voltage_now
+    chown root system /sys/class/power_supply/bms/current_now
+    chown root system /sys/class/power_supply/bms/voltage_ocv
+    chmod 0664 /sys/class/power_supply/bms/current_now
+    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
+    start vm_bms
+
+service vm_bms /sbin/vm_bms
+    class main
+    user root
+    group root wakelock
+    seclabel u:r:recovery:s0
+    disabled
