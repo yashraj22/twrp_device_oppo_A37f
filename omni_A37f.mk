@@ -32,10 +32,24 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # Inherit 64bit support
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    charger
+
+# Encryption
+PRODUCT_PACKAGES += \
+    libcryptfs_hw
+
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.hardware.keystore=msm8916
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := A37f
 PRODUCT_NAME := omni_A37f
-PRODUCT_BRAND := oppo
+PRODUCT_BRAND := OPPO
 PRODUCT_MODEL := OPPO A37f
-PRODUCT_MANUFACTURER := oppo
+PRODUCT_MANUFACTURER := OPPO
 PRODUCT_RELEASE_NAME := OPPO A37f
+
+ALLOW_MISSING_DEPENDENCIES := true
