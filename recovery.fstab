@@ -1,15 +1,21 @@
-# Android fstab file.
-# The filesystem that contains the filesystem checker binary (typically /system) cannot
-# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+#comman Partitions
+/boot            emmc              /dev/block/bootdevice/by-name/boot
+/system          ext4              /dev/block/bootdevice/by-name/system
+/system_image    emmc              /dev/block/bootdevice/by-name/system
+/data	         ext4              /dev/block/bootdevice/by-name/userdata   flags=encryptable=/dev/block/bootdevice/by-name/encrypt
+/cache	         ext4              /dev/block/bootdevice/by-name/cache
+/firmware           vfat               /dev/block/bootdevice/by-name/modem 
+/persist             ext4               /dev/block/bootdevice/by-name/persist 
+/misc	          emmc              /dev/block/bootdevice/by-name/misc
+/recovery        emmc              /dev/block/bootdevice/by-name/recovery   flags=backup=1
+/efs1            emmc              /dev/block/bootdevice/by-name/modemst1   flags=backup=1;display=EFS
+/efs2            emmc              /dev/block/bootdevice/by-name/modemst2   flags=backup=1;subpartitionof=/efs1
+/aboot             emmc            /dev/block/bootdevice/by-name/aboot	         flags=display="ABoot";backup=1;    
+/external_sd     vfat              /dev/block/mmcblk1p1  /dev/block/mmcblk1
+/usb-otg         vfat              /dev/block/sda1      /dev/block/sda              flags=removable;storage;display=USB-OTG
 
-# Mount point		FS		Device									Flags
-/boot				emmc	/dev/block/bootdevice/by-name/boot
-/recovery				emmc	/dev/block/bootdevice/by-name/recovery
-/cache			ext4	/dev/block/bootdevice/by-name/cache
-/system			ext4	/dev/block/bootdevice/by-name/system
-/system_image		emmc	/dev/block/bootdevice/by-name/system		flags=backup=1;flashimg=1
-/data				ext4	/dev/block/bootdevice/by-name/userdata
-/dev/block/bootdevice/by-name/userdata		flags=encryptable=footer;length=-16384
-
-# External storage
-/sdcard1			vfat	/dev/block/mmcblk1p1 /dev/block/mmcblk1	flags=fsflags=utf8;display=SDcard;storage;wipeingui;removable
+# OPPO Partitions
+/driver          emmc               /dev/block/bootdevice/by-name/DRIVER	 flags=display="DRIVER";backup=1;
+/reserve4        emmc       /dev/block/bootdevice/by-name/reserve4	      flags=display="RESERVE4";backup=1;
+/oppodycnvbk  emmc      /dev/block/bootdevice/by-name/oppodycnvbk      flags=display="OPPODYCNVBK";backup=1;
+/static_nv_bk     emmc     /dev/block/bootdevice/by-name/oppostanvbk     flags=display="OPPOSTANVBK";backup=1;
